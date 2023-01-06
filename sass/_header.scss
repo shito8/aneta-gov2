@@ -1,0 +1,15 @@
+
+$icon-std: 2rem;
+$height-std: 37px;
+$padding-std: 24px;
+
+$height-min: 68px;
+$padding-min: 16px;
+
+nav{
+    img{
+        height: $height-std;
+        margin-top: $height-std*.5;
+        margin-left: $height-std*.5;
+    }
+}
