@@ -125,7 +125,7 @@ section .group__cards {
   }
 }
 section .group__cards .cards {
-  width: 760px;
+  width: 850px;
   color: #FFFFFF;
   background-color: #232323;
   border: #666666 solid 2px;
@@ -306,8 +306,9 @@ section .group__cards .cards #copy {
 }
 @media (max-width: 660px) {
   section .group__cards .cards #copy {
-    left: 130px;
+    left: 155px;
     bottom: 70px;
+    width: 80px;
   }
 }
 
