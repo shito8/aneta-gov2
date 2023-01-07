@@ -6,6 +6,10 @@ $font-h1-std: 2.125rem;
 $font-h2-std: 1.5rem;
 $font-p-std: 1.125rem;
 
+$font-h1-min: 1.2rem;
+$font-h2-min: 1rem;
+$font-p-min: 0.8rem;
+
 
 main{
     display: flex;
@@ -26,6 +30,15 @@ main{
             font-size: $font-h1-std;
             font-weight: fonts.$font-weight-bold;
         }
+        @media (max-width: 900px) {
+            width: 600px;
+        }
+        @media (max-width: 660px) {
+            width: 280px;
+            h1 {
+                font-size: $font-h1-min;
+            }
+        }
     }
     div:last-child{
         width: 800px;
@@ -40,6 +53,18 @@ main{
             font-weight: fonts.$font-weight-regular;
             font-size: $font-p-std;
             text-align: justify;
+        }
+        @media (max-width: 900px) {
+            width: 600px;
+        }
+        @media (max-width: 660px) {
+            width: 280px;
+            h2 {
+                font-size: $font-h2-min;
+            }
+            p{
+                font-size: $font-p-min;
+            }
         }
     }
 
