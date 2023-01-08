@@ -158,9 +158,13 @@ section {
                     width: 30%;
                     border-radius: 8px;
                     h4{
+                        display: flex;
                         font-size: $font-h4-std;
                         font-weight: fonts.$font-weight-semibold;
                         margin-bottom: 0;
+                        p{
+                            margin-left: 5px;
+                        }
                     }
                     @media (max-width: 900px) {
                         width: 50%;
