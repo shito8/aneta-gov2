@@ -177,7 +177,6 @@ section {
 
             #copy{
                 position: absolute;
-                display: flex;
                 justify-content: center;
                 align-items: center;
                 bottom: 60px;
@@ -186,8 +185,8 @@ section {
                 width: 100px;
                 height: 25px;
                 border-radius: 25px;
-                opacity: 0;
-                transition: 0.25s;
+                transition: 0.5s;
+                display: none;
                 @media (max-width: 900px) {
                     left: 340px;
                     bottom: 70px;

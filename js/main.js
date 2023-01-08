@@ -2,40 +2,43 @@
 (()=>{
 
 window.addEventListener("load", function(){
-    countErgo1();
-    countErgo2();
-    countCardano1();
-    countCardano2();
+    const loader = document.querySelectorAll(".loader");
+    for(i=0; i<loader.length; i++){
+        loader[i].style.display="flex";
+    }
+    setTimeout(()=>{
+        countErgo1();
+        countErgo2();
+        countCardano1();
+        countCardano2();
+    },1500);
     let directions = document.querySelectorAll(".direction")
     for(i=0; i<directions.length; i++){
         directions[i].addEventListener("click", function(){
            let address = this.childNodes[1].innerHTML;
            navigator.clipboard.writeText(address).then(()=>{
-            this.childNodes[5].style.opacity=1;
+            this.childNodes[5].style.display="flex";
            setTimeout(()=>{
-            this.childNodes[5].style.opacity=0;
+            this.childNodes[5].style.display="none";
         },1500);
         })
         })
     }
 })
 
-const ergoPrueba = "https://api.ergoplatform.com/api/v1/addresses/9iLZJ7uEkve8vLphQ7jroUddYu5FWoLvGoeRtYYVvMeVrqWfc8u/balance/confirmed";
+/* const ergoPrueba = "https://api.ergoplatform.com/api/v1/addresses/9iLZJ7uEkve8vLphQ7jroUddYu5FWoLvGoeRtYYVvMeVrqWfc8u/balance/confirmed";
 
 const ergoPrueba2 = "https://api.ergoplatform.com/api/v1/addresses/9g6Rke6UEaTBZtyCFx6rASQpDn4C5puP7P82SJERRjf6Jdr4tG9/balance/confirmed";
 
-
-// tiene ctosi
-
 const cardanoPrueba1 = 'https://cardano-mainnet.tangocrypto.com/fe41f4e47c0240969d60630a77711948/v1/addresses/addr1q9r852dhp45umey759kyxrrrh9xkcvwqssm7lcsk8zm28n3kw5ywq4rfx9txfj6deyjzz4zyfq0y2huntp2u8zgccsfqmcacnc/assets';
 
-const cardanoPrueba2 = 'https://cardano-mainnet.tangocrypto.com/fe41f4e47c0240969d60630a77711948/v1/addresses/addr1q8nmgfl8n6kgqcnxn66ptg6pv96qqm42t8zyz0ld8l6eyv8v6snchtuhy9w39ax6eppasafuyq3xxxene2y6ddjd7fnsh5paz2/assets';
+const cardanoPrueba2 = 'https://cardano-mainnet.tangocrypto.com/fe41f4e47c0240969d60630a77711948/v1/addresses/addr1q8nmgfl8n6kgqcnxn66ptg6pv96qqm42t8zyz0ld8l6eyv8v6snchtuhy9w39ax6eppasafuyq3xxxene2y6ddjd7fnsh5paz2/assets'; */
 
 const policyIdAsset="5331849fbcb61fda1410c9c8228271fe85b24090df1c9a0c19fb0ff2";
 
-const addressCardano1 = "addr1q80md4t6xacfxzvm5ak903gmmed0he3d0k3x4ylxwcvy3qs5jtjeq8d8xnq59jx4c9yrt9xr6xsn0srmdy2ghgtth72qsat083";
+const addressCardano1 ='https://cardano-mainnet.tangocrypto.com/fe41f4e47c0240969d60630a77711948/v1/addresses/addr1q80md4t6xacfxzvm5ak903gmmed0he3d0k3x4ylxwcvy3qs5jtjeq8d8xnq59jx4c9yrt9xr6xsn0srmdy2ghgtth72qsat083/assets';
 
-const addressCardano2 = "addr1qyngymtfrvzvwrueadytaeufmv0ymqc3feytlfqkr32uvpjml6tmvatgluk5yd7lu04dutqg4rylx9htrxrvsva29r6szjqama";
+const addressCardano2 = 'https://cardano-mainnet.tangocrypto.com/fe41f4e47c0240969d60630a77711948/v1/addresses/addr1qyngymtfrvzvwrueadytaeufmv0ymqc3feytlfqkr32uvpjml6tmvatgluk5yd7lu04dutqg4rylx9htrxrvsva29r6szjqama/assets';
 
 const addressErgo1 = "https://api.ergoplatform.com/api/v1/addresses/9hC3QcUYK1vwNEvpjrPGC4q1egU8ydUCXLC31a58D1dWQ9wLN3o/balance/confirmed";
 
@@ -43,8 +46,9 @@ const addressErgo2 = "https://api.ergoplatform.com/api/v1/addresses/9hSXi4eBfvzN
 
 async function countErgo1(){
     let vote = document.getElementById("ergo1")
+    let cant = 0;
     try{
-        const response = await fetch(`${ergoPrueba}`)
+        const response = await fetch(`${addressErgo1}`)
         const data = await response.json()
         const tokens = data.tokens
         for(i=0; i<tokens.length;i++){
@@ -59,15 +63,15 @@ async function countErgo1(){
             }
     }
     catch (err){
-        cant = 0;
     }
     vote.innerHTML=cant;
 }
 
 async function countErgo2(){
     let vote = document.getElementById("ergo2")
+    let cant2 = 0;
     try{
-        const response = await fetch(`${ergoPrueba2}`)
+        const response = await fetch(`${addressErgo2}`)
         const data = await response.json()
         const tokens = data.tokens
         for(i=0; i<tokens.length;i++){
@@ -82,7 +86,6 @@ async function countErgo2(){
             }
     }
     catch (err){
-        cant2 = 0;
     }
     vote.innerHTML=cant2;
 }
@@ -91,8 +94,9 @@ const options = {method: 'GET', headers: {'Content-Type': 'application/json', 'x
 
 async function countCardano1(){
     let vote = document.getElementById("cardano1")
+    let cantToken = 0;
     try{
-        const response = await fetch(`${cardanoPrueba1}`, options)
+        const response = await fetch(`${addressCardano1}`, options)
         const data = await response.json()
         const tokens = data.data
         for(i=0; i<tokens.length;i++){
@@ -106,15 +110,16 @@ async function countCardano1(){
         }
     }
     catch (err){
-        cantToken = 0;
+        console.log("error")
     }
     vote.innerHTML=cantToken;
 }
 
 async function countCardano2(){
     let vote2 = document.getElementById("cardano2")
+    let cantToken2 = 0;
     try{
-        const response = await fetch(`${cardanoPrueba2}`, options)
+        const response = await fetch(`${addressCardano2}`, options)
         const data = await response.json()
         const tokens = data.data
         for(i=0; i<tokens.length;i++){
@@ -128,42 +133,10 @@ async function countCardano2(){
         }
     }
     catch (err){
-        cantToken2 = 0;
+        console.log("error")
     }
     vote2.innerHTML=cantToken2;
 }
-
-
-//asset vote asset1yrnjhm8kfya0l3n3qsh52llyg5rkl48syfj3tx
-//asset aneta asset1wnxwy544zu8fgyed5vkp2sf3t4t9aptfkc2z5x
-//asset tosi asset1uaxup2yv695uat3chgwqtpg9xvau55pd5z6r46
-//asset cvote1 asset1k2k9vy85zuu96jvsepg80ymaws793vh86h6snf
-//id cvote 5331849fbcb61fda1410c9c8228271fe85b24090df1c9a0c19fb0ff2
-
-//wallet con cvote1 addr1q9r852dhp45umey759kyxrrrh9xkcvwqssm7lcsk8zm28n3kw5ywq4rfx9txfj6deyjzz4zyfq0y2huntp2u8zgccsfqmcacnc
-
-// info del token
-/* 
-fetch('https://cardano-mainnet.tangocrypto.com/fe41f4e47c0240969d60630a77711948/v1/assets/asset1yrnjhm8kfya0l3n3qsh52llyg5rkl48syfj3tx', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
- */
-
-
-// cuantas wallet tienen el token
-/* 
-fetch('https://cardano-mainnet.tangocrypto.com/fe41f4e47c0240969d60630a77711948/v1/assets/asset1yrnjhm8kfya0l3n3qsh52llyg5rkl48syfj3tx/addresses', options)
-.then(response => response.json())
-.then(response => console.log(response))
-.catch(err => console.error(err)); 
-*/
-
-/* fetch('https://cardano-mainnet.tangocrypto.com/fe41f4e47c0240969d60630a77711948/v1/addresses/addr1q9r852dhp45umey759kyxrrrh9xkcvwqssm7lcsk8zm28n3kw5ywq4rfx9txfj6deyjzz4zyfq0y2huntp2u8zgccsfqmcacnc/assets', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err)); */
-
 
 
 })();
